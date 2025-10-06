@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agenzia Lavoro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style> body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;} </style>
+</head>
+<body class="bg-white text-slate-800">
+  <!-- NAV -->
+  <header class="sticky top-0 z-30 bg-white/80 backdrop-blur border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-9 h-9 rounded-xl bg-emerald-500"></div>
+        <span class="font-extrabold text-xl">Agenzia Lavoro</span>
+      </div>
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="#chi-siamo" class="hover:text-emerald-600">Chi siamo</a>
+        <a href="#ricerca" class="hover:text-emerald-600">Ricerca lavoro</a>
+        <a href="#offerta" class="hover:text-emerald-600">Offerta lavoro</a>
+        <button id="btnAccedi" class="px-4 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">Accedi</button>
+      </nav>
+      <button id="btnAccediSm" class="md:hidden px-3 py-2 rounded-lg bg-emerald-600 text-white">Accedi</button>
+    </div>
+  </header>
+
+  <!-- HERO / SPLASH -->
+  <section class="relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Trova lavoro. Trova persone. <span class="text-emerald-600">Subito</span>.</h1>
+        <p class="mt-4 text-lg text-slate-600">Piattaforma semplice per candidati e aziende: profilo, CV e matching per zona e ruolo.</p>
+        <div class="mt-6 flex gap-3">
+          <button id="btnAccediHero" class="px-5 py-3 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">Accedi</button>
+          <a href="#ricerca" class="px-5 py-3 rounded-xl border border-slate-300 hover:border-slate-400">Scopri</a>
+        </div>
+      </div>
+      <!-- Splash photos grid (ispirato a ernesto.it) -->
+      <div class="grid grid-cols-3 grid-rows-3 gap-3">
+        <img class="rounded-2xl object-cover h-36 w-full shadow" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800&auto=format&fit=crop" alt="Team"/>
+        <img class="rounded-2xl object-cover h-48 w-full row-span-2 shadow" src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=800&auto=format&fit=crop" alt="Colloquio"/>
+        <img class="rounded-2xl object-cover h-36 w-full shadow" src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=800&auto=format&fit=crop" alt="Ufficio"/>
+        <img class="rounded-2xl object-cover h-48 w-full col-span-2 shadow" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop" alt="Lavoro"/>
+        <img class="rounded-2xl object-cover h-36 w-full shadow" src="https://images.unsplash.com/photo-1515165562835-c3b8c8f9a5b0?q=80&w=800&auto=format&fit=crop" alt="Incontro"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEZIONI PRINCIPALI -->
+  <section id="chi-siamo" class="bg-slate-50 border-t border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-14 grid md:grid-cols-3 gap-10 items-start">
+      <div class="md:col-span-2">
+        <h2 class="text-2xl font-bold">Chi siamo</h2>
+        <p class="mt-3 text-slate-600">Siamo un'agenzia digitale che facilita l'incontro tra domanda e offerta di lavoro con strumenti semplici e trasparenti.</p>
+        <ul class="mt-4 list-disc pl-6 text-slate-600">
+          <li>Registrazione rapida e profilo completo</li>
+          <li>Upload del CV in PDF/DOCX</li>
+          <li>Ricerca per zona e ruolo</li>
+        </ul>
+      </div>
+      <div class="p-5 bg-white rounded-2xl shadow">
+        <h3 class="font-semibold">Contatti</h3>
+        <p class="text-slate-600 mt-2">Email: agenziaromalavoro@gmail.com<br/>Telefono: +39 3478718146</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ricerca" class="">
+    <div class="max-w-6xl mx-auto px-4 py-14">
+      <h2 class="text-2xl font-bold">Ricerca lavoro</h2>
+      <p class="text-slate-600 mt-2">Consulta i profili pubblici in base a ruolo e zona.</p>
+      <div id="results" class="mt-6 grid md:grid-cols-3 gap-5"></div>
+    </div>
+  </section>
+
+  <section id="offerta" class="bg-slate-50 border-t border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-14">
+      <h2 class="text-2xl font-bold">Offerta lavoro</h2>
+      <p class="text-slate-600 mt-2">Accedi per creare o aggiornare il tuo profilo e caricare il CV.</p>
+    </div>
+  </section>
+
+  <!-- DASHBOARD CANDIDATO (visibile dopo login) -->
+  <section id="dashboard" class="hidden border-t border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-14 grid md:grid-cols-3 gap-8">
+      <!-- PROFILO -->
+      <div class="md:col-span-2 bg-white rounded-2xl shadow p-6">
+        <h3 class="text-xl font-bold">Il tuo profilo</h3>
+        <p class="text-slate-600 text-sm mt-1">Compila i dati e salva. Poi carica il tuo CV.</p>
+        <div class="grid md:grid-cols-2 gap-4 mt-5">
+          <input id="full_name" class="border rounded-xl px-3 py-2" placeholder="Nome e cognome"/>
+          <input id="phone" class="border rounded-xl px-3 py-2" placeholder="Telefono"/>
+          <input id="residence_zone" class="border rounded-xl px-3 py-2" placeholder="Zona di residenza (es. San Giovanni)"/>
+          <input id="search_zone" class="border rounded-xl px-3 py-2" placeholder="Zona di ricerca (es. Ostiense)"/>
+          <input id="desired_job" class="border rounded-xl px-3 py-2 md:col-span-2" placeholder="Lavoro cercato (es. Badante H24, Addetto pulizie, Cameriere)"/>
+          <textarea id="about" rows="4" class="border rounded-xl px-3 py-2 md:col-span-2" placeholder="Presentati in poche righe"></textarea>
+        </div>
+        <div class="mt-4 flex gap-3">
+          <button id="btnSaveProfile" class="px-4 py-2 rounded-xl bg-emerald-600 text-white">Salva profilo</button>
+          <button id="btnLoadProfile" class="px-4 py-2 rounded-xl border">Ricarica</button>
+        </div>
+        <p id="profileMsg" class="text-sm mt-2 text-emerald-700"></p>
+      </div>
+
+      <!-- CV UPLOAD -->
+      <div class="bg-white rounded-2xl shadow p-6">
+        <h3 class="text-lg font-semibold">Curriculum Vitae</h3>
+        <p class="text-slate-600 text-sm mt-1">Carica PDF o DOCX (max 2MB).</p>
+        <input id="cvFile" type="file" accept=".pdf,.doc,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword" class="mt-4"/>
+        <button id="btnUploadCV" class="mt-3 w-full px-4 py-2 rounded-xl bg-emerald-600 text-white">Carica CV</button>
+        <p id="cvMsg" class="text-sm mt-2 text-emerald-700"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-10 flex flex-col md:flex-row gap-4 items-center justify-between">
+      <p class="text-slate-500">© 2025 Agenzia Lavoro</p>
+      <button id="btnAccediFooter" class="px-4 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">Accedi</button>
+    </div>
+  </footer>
+
+  <!-- MODALE ACCESSO/REGISTRAZIONE -->
+  <div id="authModal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/40" data-close></div>
+    <div class="relative max-w-md mx-auto mt-24 bg-white rounded-2xl shadow-xl p-6">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xl font-bold">Accedi</h3>
+        <button class="text-slate-500" data-close>&times;</button>
+      </div>
+      <div class="mt-4 space-y-3">
+        <input id="email" type="email" placeholder="Email" class="w-full border rounded-xl px-3 py-2"/>
+        <input id="password" type="password" placeholder="Password" class="w-full border rounded-xl px-3 py-2"/>
+        <button id="btnLogin" class="w-full px-4 py-2 rounded-xl bg-emerald-600 text-white">Entra</button>
+        <div class="text-center text-sm text-slate-500">Oppure</div>
+        <button id="btnRegister" class="w-full px-4 py-2 rounded-xl border">Crea account</button>
+        <p id="authMsg" class="text-sm text-center text-rose-600"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE = 'https://AGENZIA-LAVORO-API.workers.dev'; // <-- cambia con il tuo URL Workers
+
+    // Open/close modal
+    const modal = document.getElementById('authModal');
+    function openModal(){ modal.classList.remove('hidden'); }
+    function closeModal(e){ if(!e || e.target.dataset.close !== undefined || e.target === modal) modal.classList.add('hidden'); }
+    ['btnAccedi','btnAccediSm','btnAccediHero','btnAccediFooter'].forEach(id => {
+      const el = document.getElementById(id); if(el) el.addEventListener('click', openModal);
+    });
+    modal.addEventListener('click', closeModal);
+
+    // Simple POST helper
+    async function POST(path, body){
+      const res = await fetch(API_BASE + path, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body), credentials:'include' });
+      return await res.json().catch(()=>({}));
+    }
+
+    const msg = document.getElementById('authMsg');
+    document.getElementById('btnLogin').onclick = async () => {
+      msg.textContent = '...';
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const r = await POST('/api/auth/login', { email, password });
+      if(r && r.ok){ msg.textContent = 'Accesso riuscito'; closeModal(new Event('close',{bubbles:true})); loadPublic(); }
+      else { msg.textContent = (r && r.error) || 'Errore di accesso'; }
+    }
+
+    document.getElementById('btnRegister').onclick = async () => {
+      msg.textContent = '...';
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const r = await POST('/api/auth/register', { email, password });
+      if(r && r.ok){ msg.textContent = 'Account creato. Ora accedi.'; }
+      else { msg.textContent = (r && r.error) || 'Errore di registrazione'; }
+    }
+
+    // Demo: carica profili pubblici (endpoint da implementare nel Worker: GET /api/search?limit=6)
+    async function loadPublic(){
+      try{
+        const res = await fetch(API_BASE + '/api/search?limit=6');
+        const data = await res.json();
+        const grid = document.getElementById('results');
+        grid.innerHTML = '';
+        (data.results||[]).forEach(p => {
+          const el = document.createElement('div');
+          el.className = 'bg-white rounded-2xl shadow p-5';
+          el.innerHTML = `<div class=\"font-semibold\">${p.full_name||'Candidato'}</div>
+            <div class=\"text-sm text-slate-500 mt-1\">${p.desired_job||''} · ${p.search_zone||''}</div>
+            <p class=\"text-sm text-slate-600 mt-2\">${(p.about||'').slice(0,120)}...</p>`;
+          grid.appendChild(el);
+        })
+      }catch(e){ /* silenzio */ }
+    }
+    loadPublic();
+  </script>
+  <script>
+    // --- Dashboard & Profilo + Upload CV ---
+    const DASH = document.getElementById('dashboard');
+    function showDashboard(){ if(DASH) DASH.classList.remove('hidden'); }
+    function fillProfile(p){
+      (document.getElementById('full_name')||{}).value = p.full_name||'';
+      (document.getElementById('phone')||{}).value = p.phone||'';
+      (document.getElementById('residence_zone')||{}).value = p.residence_zone||'';
+      (document.getElementById('search_zone')||{}).value = p.search_zone||'';
+      (document.getElementById('desired_job')||{}).value = p.desired_job||'';
+      (document.getElementById('about')||{}).value = p.about||'';
+    }
+
+    // Prova a rilevare sessione esistente e mostrare dashboard
+    (async function(){
+      try {
+        const r = await fetch(API_BASE + '/api/profile/get', { credentials:'include' });
+        if(r.ok){ const d = await r.json(); fillProfile(d.profile||{}); showDashboard(); }
+      } catch(e) {}
+    })();
+
+    const btnSave = document.getElementById('btnSaveProfile');
+    if(btnSave){ btnSave.addEventListener('click', async () => {
+      const body = {
+        full_name: (document.getElementById('full_name')||{}).value?.trim()||'',
+        phone: (document.getElementById('phone')||{}).value?.trim()||'',
+        residence_zone: (document.getElementById('residence_zone')||{}).value?.trim()||'',
+        search_zone: (document.getElementById('search_zone')||{}).value?.trim()||'',
+        desired_job: (document.getElementById('desired_job')||{}).value?.trim()||'',
+        about: (document.getElementById('about')||{}).value?.trim()||''
+      };
+      const profileMsg = document.getElementById('profileMsg');
+      if(profileMsg) profileMsg.textContent = 'Salvataggio in corso...';
+      const res = await fetch(API_BASE + '/api/profile/save', { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body: JSON.stringify(body) });
+      const data = await res.json().catch(()=>({}));
+      if(profileMsg) profileMsg.textContent = (data && data.ok) ? 'Profilo salvato ✅' : (data && data.error) || 'Errore salvataggio';
+      try{ loadPublic && loadPublic(); }catch(e){}
+    }); }
+
+    const btnLoad = document.getElementById('btnLoadProfile');
+    if(btnLoad){ btnLoad.addEventListener('click', async () => {
+      const r = await fetch(API_BASE + '/api/profile/get', { credentials:'include' });
+      const d = await r.json().catch(()=>({}));
+      if(d && d.profile) fillProfile(d.profile);
+    }); }
+
+    const btnUpload = document.getElementById('btnUploadCV');
+    if(btnUpload){ btnUpload.addEventListener('click', async () => {
+      const f = (document.getElementById('cvFile')||{}).files?.[0];
+      const cvMsg = document.getElementById('cvMsg');
+      if(!f){ if(cvMsg) cvMsg.textContent = 'Seleziona un file'; return; }
+      const fd = new FormData(); fd.append('cv', f);
+      if(cvMsg) cvMsg.textContent = 'Caricamento...';
+      const r = await fetch(API_BASE + '/api/cv/upload', { method:'POST', body: fd, credentials:'include' });
+      const d = await r.json().catch(()=>({}));
+      if(cvMsg) cvMsg.textContent = (d && d.ok) ? 'CV caricato ✅' : (d && d.error) || 'Errore caricamento';
+    }); }
+
+    // Dopo login, prova a mostrare la dashboard
+    const loginBtn = document.getElementById('btnLogin');
+    if(loginBtn){
+      const original = loginBtn.onclick || (async ()=>{});
+      loginBtn.onclick = async () => {
+        await original();
+        try{ const r = await fetch(API_BASE + '/api/profile/get', { credentials:'include' }); if(r.ok){ const d = await r.json(); fillProfile(d.profile||{}); showDashboard(); } }catch(e){}
+      };
+    }
+  </script>
+</body>
+</html>
